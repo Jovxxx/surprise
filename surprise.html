@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#ffb6d5,#ffd6e8,#ffeef5,#ffc0cb);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+    font-family:Poppins,sans-serif;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    text-align:center;
+    z-index:10;
+}
+
+button{
+    padding:18px 45px;
+    font-size:24px;
+    border:none;
+    border-radius:50px;
+    background:#ff2d75;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow:0 0 30px rgba(255,0,100,.5);
+    transition:.4s;
+}
+
+button:hover{
+    transform:scale(1.12);
+    box-shadow:0 0 60px hotpink;
+}
+
+#message{
+    display:none;
+}
+
+#title{
+    font-family:'Great Vibes',cursive;
+    font-size:90px;
+    color:#ff0055;
+    text-shadow:0 0 15px white,0 0 35px hotpink;
+}
+
+#typing{
+    font-size:28px;
+    color:white;
+    margin-top:25px;
+    min-height:90px;
+    font-weight:500;
+}
+
+#quote{
+    margin-top:20px;
+    color:white;
+    font-size:20px;
+    opacity:0;
+    transition:2s;
+}
+
+.heart{
+    position:absolute;
+    color:#ff0055;
+    animation:float linear forwards;
+}
+
+@keyframes float{
+
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-120vh) scale(2);
+        opacity:0;
+    }
+
+}
+
+.beat{
+
+    display:inline-block;
+    animation:beat 1s infinite;
+
+}
+
+@keyframes beat{
+
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.3);}
+
+}
+
+.petal{
+
+    position:absolute;
+    color:#ff4f88;
+    font-size:22px;
+    animation:fall linear forwards;
+
+}
+
+@keyframes fall{
+
+    from{
+
+        transform:translateY(-10vh) rotate(0deg);
+
+    }
+
+    to{
+
+        transform:translateY(110vh) rotate(720deg);
+
+    }
+
+}
+
+.sparkle{
+
+    position:absolute;
+    color:white;
+    animation:sparkle 2s linear infinite;
+
+}
+
+@keyframes sparkle{
+
+    0%{opacity:0;transform:scale(.5);}
+    50%{opacity:1;transform:scale(1.5);}
+    100%{opacity:0;transform:scale(.5);}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<button id="btn">
+❤️ Click Me, Love ❤️
+</button>
+
+<div id="message">
+
+<h1 id="title">
+LABYU <span class="beat">❤️</span>
+</h1>
+
+<div id="typing"></div>
+
+<div id="quote">
+🌹 "Every heartbeat whispers your name." 🌹
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const btn=document.getElementById("btn");
+const msg=document.getElementById("message");
+const typing=document.getElementById("typing");
+const quote=document.getElementById("quote");
+
+const text=
+"I just wanted to remind you that no matter how busy the world gets, you'll always have a special place in my heart. Thank you for existing. ❤️";
+
+btn.onclick=()=>{
+
+    btn.style.display="none";
+    msg.style.display="block";
+
+    startTyping();
+
+    setInterval(makeHeart,180);
+
+    setInterval(makePetal,450);
+
+    setInterval(makeSparkle,350);
+
+}
+
+function startTyping(){
+
+    let i=0;
+
+    const timer=setInterval(()=>{
+
+        typing.innerHTML+=text.charAt(i);
+
+        i++;
+
+        if(i>=text.length){
+
+            clearInterval(timer);
+
+            quote.style.opacity=1;
+
+        }
+
+    },55);
+
+}
+
+function makeHeart(){
+
+    const h=document.createElement("div");
+
+    h.className="heart";
+
+    h.innerHTML="❤️";
+
+    h.style.left=Math.random()*100+"vw";
+
+    h.style.top="100vh";
+
+    h.style.fontSize=(20+Math.random()*35)+"px";
+
+    h.style.animationDuration=(3+Math.random()*4)+"s";
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>h.remove(),7000);
+
+}
+
+function makePetal(){
+
+    const p=document.createElement("div");
+
+    p.className="petal";
+
+    p.innerHTML="🌸";
+
+    p.style.left=Math.random()*100+"vw";
+
+    p.style.animationDuration=(5+Math.random()*5)+"s";
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>p.remove(),10000);
+
+}
+
+function makeSparkle(){
+
+    const s=document.createElement("div");
+
+    s.className="sparkle";
+
+    s.innerHTML="✨";
+
+    s.style.left=Math.random()*100+"vw";
+
+    s.style.top=Math.random()*100+"vh";
+
+    s.style.fontSize=(15+Math.random()*20)+"px";
+
+    document.body.appendChild(s);
+
+    setTimeout(()=>s.remove(),2000);
+
+}
+
+</script>
+
+</body>
+</html>
